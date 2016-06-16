@@ -1,0 +1,19 @@
+# MySQL logrotate configuration
+
+<%= log_path.join('*').join('*.log') %> {
+  daily
+  missingok
+  rotate 7 
+  compress
+  dateext
+  notifempty
+  sharedscripts
+  postrotate
+    # Check if mysqld is really running
+    test -x <%= mysqladmin_executable %> || exit 0
+    if <%= ping_command %> >/dev/null 2>&1
+    then
+      <%= reopen_logs_command %>
+    fi
+  endscript
+}

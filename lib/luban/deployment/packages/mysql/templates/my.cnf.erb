@@ -1,0 +1,101 @@
+# MySQL configuration file
+
+# MySQL client configuration
+# =====================================
+[client]
+port = 3306
+socket = <%= socket_path %>
+default-character-set = utf8
+
+# MySQL server configuration
+# =====================================
+[mysqld]
+user = <%= user %>
+port = 3306
+
+# Directory settings
+# -------------------------------------
+basedir = <%= install_path %>
+datadir = <%= data_path %>
+tmpdir = <%= app_tmp_path %>
+socket = <%= socket_path %>
+pid-file = <%= pid_file_path %>
+secure_file_priv = <%= secure_file_priv_path %>
+
+# SSL settings
+# -------------------------------------
+ssl_ca = <%= ssl_ca_path %>
+ssl_cert = <%= ssl_cert_path %>
+ssl_key = <%= ssl_key_path %>
+
+# Log settings
+# -------------------------------------
+log_output = File
+
+# Error log
+log-error = <%= error_log_file_path %>
+
+# General log
+general_log = 1
+general_log_file = <%= general_log_file_path %>
+
+# Slow query log
+slow_query_log = 1
+slow_query_log_file = <%= slow_query_log_file_path %>
+
+# Binary log
+binlog_format = mixed # binary logging format - mixed recommended
+log-bin = <%= bin_log_file_path %>
+server-id = 1
+
+# UTF8 settings
+# -------------------------------------
+character-set-server = utf8
+collation-server = utf8_general_ci
+init_connect = 'SET NAMES utf8'
+
+# General performance settings
+skip-external-locking
+key_buffer_size = 16M # 16K/16M/256M 
+max_allowed_packet = 1M
+table_open_cache = 64 # 4/64/256
+sort_buffer_size = 512K # 64K/512K/1M
+net_buffer_length = 8K # 2K/8K/
+read_buffer_size = 256K # 256K/256K/1M
+read_rnd_buffer_size = 512K # 256K/512K/4M
+myisam_sort_buffer_size = 8M # /8M/64M
+thread_stack = 128K # 128K//
+thread_cache_size = 8
+query_cache_size= 16M
+
+# InnoDB settings
+# -------------------------------------
+innodb_data_home_dir = <%= data_path %>
+# innodb_data_file_path = ibdata0001:20M:autoextend
+# innodb_data_file_path = ibdata0001:200M;ibdata0002:200M;ibdata0003:200M
+innodb_log_group_home_dir = <%= innodb_log_group_home_path %>
+# You can set .._buffer_pool_size up to 50 - 80 %
+# of RAM but beware of setting memory usage too high
+innodb_buffer_pool_size = 32M
+# Set .._log_file_size to 25 % of buffer pool size
+innodb_log_file_size = 8M
+innodb_log_buffer_size = 8M
+innodb_flush_log_at_trx_commit = 1
+innodb_lock_wait_timeout = 50
+
+[mysqldump]
+quick
+max_allowed_packet = 16M
+
+[mysql]
+no-auto-rehash
+default-character-set = utf8
+
+[myisamchk]
+key_buffer_size = 20M
+sort_buffer_size = 20M
+read_buffer = 2M
+write_buffer = 2M
+
+[mysqlhotcopy]
+# interactive-timeout
