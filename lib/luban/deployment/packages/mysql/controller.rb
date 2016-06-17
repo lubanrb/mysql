@@ -7,6 +7,7 @@ module Luban
             def self.included(base)
               base.define_executable 'mysqld_safe'
               base.define_executable 'mysqladmin'
+              base.define_executable 'mysqld'
             end
 
             def mysqld_safe_command
@@ -18,7 +19,7 @@ module Luban
             end
 
             def process_pattern
-              @process_pattern ||= "^#{mysqld_safe_command}"
+              @process_pattern ||= "^#{mysqld_executable} --defaults-file=#{control_file_path}"
             end
 
             alias_method :start_command, :mysqld_safe_command
