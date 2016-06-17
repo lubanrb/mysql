@@ -17,8 +17,11 @@ module Luban
               @mysqldadmin_command ||= "#{mysqladmin_executable} --defaults-file=#{admin_control_file_path}"
             end
 
+            def process_pattern
+              @process_pattern ||= "^#{mysqld_safe_command}"
+            end
+
             alias_method :start_command, :mysqld_safe_command
-            alias_method :process_pattern, :mysqld_safe_command
 
             def start_command
               @start_command ||= "#{mysqld_safe_command}"
