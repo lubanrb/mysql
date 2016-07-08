@@ -1,5 +1,11 @@
 # Change log
 
+## Version 0.1.3 (Jul 08, 2016)
+
+Minor enhancements:
+  * Refactored method #default_templates_path in a DRY way
+  * Added gem dependency for Luban with version 0.6.0 or above
+
 ## Version 0.1.2 (Jun 17, 2016)
 
 Bug fixes:
