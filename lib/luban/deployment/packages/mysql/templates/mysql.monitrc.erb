@@ -2,6 +2,7 @@
 
 check process <%= service_entry %>
   with pidfile <%= pid_file_path %>
+  onreboot laststate
   start program = "/bin/bash -c 'sleep 1; cd <%= install_path %>; <%= start_command %> >/dev/null 2>&1 &'"
   stop program = "/bin/bash -c '<%= stop_command %>'"
   if totalmem is greater than 150.0 MB for 40 cycles then alert
