@@ -1,5 +1,10 @@
 # Change log
 
+## Version 0.1.5 (Jul 27, 2016)
+
+Bug fixes:
+  * Refactored #default_templates_path to fix an inheritance issue
+
 ## Version 0.1.4 (Jul 11, 2016)
 
 Minor enhancements:
