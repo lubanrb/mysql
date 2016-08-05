@@ -7,15 +7,15 @@ module Luban
           { major_version: "#{vers[0]}.#{vers[1]}", patch_level: vers[2] }
         end
 
-        def default_templates_path
-          @default_templates_path ||= base_templates_path(__FILE__)
-        end
-
         %i(reload_process reopen_logs ping_process).each do |action|
           service_action action, dispatch_to: :controller
         end
 
         protected
+
+        def include_default_templates_path
+          default_templates_paths.unshift(base_templates_path(__FILE__))
+        end
 
         def setup_install_tasks
           super
