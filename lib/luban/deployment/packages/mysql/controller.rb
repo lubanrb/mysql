@@ -10,6 +10,10 @@ module Luban
               base.define_executable 'mysqld'
             end
 
+            def shell_setup
+              @shell_setup ||= super << "cd #{install_path}"
+            end
+
             def mysqld_safe_command
               @mysqld_safe_command ||= "#{mysqld_safe_executable} --defaults-file=#{control_file_path}"
             end
@@ -22,14 +26,12 @@ module Luban
               @process_pattern ||= "^#{mysqld_executable} --defaults-file=#{control_file_path}"
             end
 
-            alias_method :start_command, :mysqld_safe_command
-
             def start_command
-              @start_command ||= "#{mysqld_safe_command}"
+              @start_command ||= shell_command("#{mysqld_safe_command}", output: nil) + ' &'
             end
 
             def stop_command
-              @stop_command ||= "kill $(cat #{pid_file_path} 2>/dev/null)"
+              @stop_command ||= shell_command("kill $(cat #{pid_file_path} 2>/dev/null)")
             end
 
             def ping_command
@@ -57,12 +59,6 @@ module Luban
           def default_pending_interval; 5; end
 
           protected
-
-          def start_process!
-            within install_path do
-              capture(:nohup, "#{start_command} >/dev/null 2>&1 &")
-            end
-          end
 
           def reload_process!
             capture("kill -HUP $(cat #{pid_file_path} 2>/dev/null) 2>&1")
