@@ -17,27 +17,29 @@ module Luban
           default_templates_paths.unshift(base_templates_path(__FILE__))
         end
 
-        def setup_install_tasks
+        def setup_provision_tasks
           super
-          commands[:install].option :dist, "Binary distribution"
+          provision_tasks[:install].option :dist, "Binary distribution"
         end
 
         def setup_control_tasks
           super
 
-          task :reload do
-            desc "Reload process"
-            action! :reload_process
-          end
+          commands[:control].alter do
+            task :reload do
+              desc "Reload process"
+              action! :reload_process
+            end
 
-          task :reopen do
-            desc "Reopen log files"
-            action! :reopen_logs
-          end
+            task :reopen do
+              desc "Reopen log files"
+              action! :reopen_logs
+            end
 
-          task :ping do
-            desc "Ping process"
-            action! :ping_process
+            task :ping do
+              desc "Ping process"
+              action! :ping_process
+            end
           end
         end
       end
