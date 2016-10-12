@@ -2,11 +2,15 @@
 
 <%= log_path.join('*').join('*.log') %> {
   daily
+  maxsize 5M
+  maxage 14
+  rotate <%= 14 * 24 * (60 / 10) %>
   missingok
-  rotate 7 
   compress
+  compresscmd <%= `which gzip`.chomp %>
   dateext
-  notifempty
+  dateformat -%Y%m%d-%H%M%S
+  olddir archived_logs
   sharedscripts
   postrotate
     # Check if mysqld is really running
