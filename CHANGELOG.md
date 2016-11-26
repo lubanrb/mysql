@@ -1,5 +1,13 @@
 # Change log
 
+## Version 0.1.11 (Nov 27, 2016)
+
+Minor enhancements:
+  * Bump up gem dependency of Luban to version 0.10.8
+
+Bug fixes:
+  * Fixed superclass mismatch exception when loading gem from filesystem directly
+
 ## Version 0.1.10 (Oct 19, 2016)
 
 Minor enhancements:
