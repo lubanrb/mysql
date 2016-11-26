@@ -5,7 +5,7 @@ require 'luban/deployment/packages/mysql/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "luban-mysql"
-  spec.version       = Luban::Deployment::Packages::Mysql::VERSION
+  spec.version       = Luban::Deployment::Packages::MYSQL_VERSION
   spec.authors       = ["Rubyist Chi"]
   spec.email         = ["rubyist.chi@gmail.com"]
 
