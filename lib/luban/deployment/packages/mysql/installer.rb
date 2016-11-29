@@ -50,6 +50,7 @@ module Luban
           def build_package
             info "Building #{package_full_name}"
             within install_path do
+              rm('-r', '*') # Clean up install path
               execute(:mv, build_path.join('*'), '.', ">> #{install_log_file_path} 2>&1")
               execute(:"bin/mysqld", "--initialize-insecure #{compose_build_options} >> #{install_log_file_path} 2>&1")
               execute(:"bin/mysql_ssl_rsa_setup", "--datadir=#{ssl_rsa_path}", ">> #{install_log_file_path} 2>&1")
